@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Profile </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <div class="add-post">Add Post</div>
+    <div class="post-infornartion">New Post Added</div>
+    <nav>
+      <div class="nav-wrapper z-depth-1">
+        <div class="container">
+          <div class="col s12 m12 l12">
+            <a href="#!" class="brand-logo">PenFriends</a>
+            <a href="#!" class="mdi-image-dehaze"></a>
+            <ul class="side-nav wrap-nav">
+              <li class="active"><a href="#"><i class="mdi-action-home left"></i>Home</a></li>
+              <li><a href="search.html"><i class="mdi-action-search left"></i>Search</a></li>
+              <li><a href="profile.html"><i class="mdi-action-account-circle left"></i>Profile</a></li>
+              <li><a href="event.html"><i class="mdi-action-view-module left"></i>Event</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- status page -->
+    <div class="col s4 ">
+      <div class="post-container" id="post">
+        <div class="post-detail clearfix">
+          <div class="profile-dp"><img src="profile.png" alt="profile" class="profile-pic" /></div>
+          <!-- <div class="profile-data"> -->
+          <div class="left"><div class="name">Name</div>
+          <div class="post-info">
+            <span class="freind-name">Freind name</span>
+            <!-- <span class="group-name">Group name</span> -->
+          </div>
+          
+        </div>
+        <div class="right">
+          <div><span  class="fav"></span></div>
+          <div><span class="date-time"> 24 Feb</span></div>
+        </div>
+        <!-- </div> -->
+      </div>
+      <div class="post-content">
+        Welcome to Lorem ipsum dolor sit amet, consectetur
+        adipisicing elit. Quis, tenetur, perferendis eius impedit
+        labore vitae tempora consectetur corporis dolores fugiat
+        molestiae nihil facilis provident necessitatibus sit
+        architecto voluptas ut cupididate. Lorem ipsum dolor sit
+        amet, consectetur.
+      </div>
+      <div class="reply-option"> <a href="#" class="like">Like</a>
+      <a href="#" class="reply">Reply</a>
+    </div>
+    <div class="add-comment"></div>
+    <div  class="comments">
+      <textarea class="comment-box" required></textarea>
+      <a href="#" class="submit">Submit</a>
+    </div>
+  </div>
+  <div class="post-container">
+      <div class="post-detail clearfix">
+            <div class="profile-dp"><img src="profile.png" alt="profile" class="profile-pic" /></div>
+            <!-- <div class="profile-data"> -->
+            <div class="left"><div class="name">Name</div>
+            <div class="post-info">
+              <span class="freind-name">Freind name</span>
+              <!-- <span class="group-name">Group name</span> -->
+            </div>
+            
+          </div>
+          <div class="right">
+            <div><span  class="fav"></span></div>
+            <div><span class="date-time"> 24 Feb</span></div>
+          </div>
+          <!-- </div> -->
+      </div>
+    <div class="post-content">
+      Welcome to Lorem ipsum dolor sit amet, consectetur
+      adipisicing elit. Quis, tenetur, perferendis eius impedit
+      labore vitae tempora consectetur corporis dolores fugiat
+      molestiae nihil facilis provident necessitatibus sit
+      architecto voluptas ut cupididate. Lorem ipsum dolor sit
+      amet, consectetur.
+    </div>
+    <div class="reply-option"> <a href="#" class="like">Like</a>
+    <a href="#" class="reply">Reply</a>
+  </div>
+  <div class="add-comment"></div>
+  <div  class="comments">
+    <textarea class="comment-box" required></textarea>
+    <a href="#" class="submit">Submit</a>
+  </div>
+</div>
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(e){
+  $('.materialboxed').materialbox();
+var user="Risheekesh";
+var pass="12345";
+var username=$("#username");
+var password=$('#password');
+$('.name').html(user);
+var currentdate = new Date();
+var datetime =currentdate.toDateString() + " "
++ currentdate.getHours() + ":"
++ currentdate.getMinutes();
+$('.date-time').html(datetime);
+$('.reply').click(function(e){
+$('.comments').css('display','none');
+$(this).parent().parent().find('.comments').children('.comment-box').val("");
+$(this).parent().parent().find('.comments').css('display','block');
+e.preventDefault();
+
+
+});
+$('.like').click(function(){
+
+if ($(this).html()=="Like")
+{
+$(this).html("Unlike");
+}
+else
+{
+$(this).html("Like");
+}
+});
+$('.submit').click(function(){
+if($(this).parent().find('.comment-box').val()=="")
+{
+}
+else{
+var add_post=$(this).parent().find('.comment-box').val();
+$(this).parent().parent().find('.add-comment').append('<p class="comment-post">' +add_post+'</p>');
+$(this).parent().hide();
+console.log(add_post);
+}
+
+});
+// $('#login').click(function(e){
+//   if((username.val()==user) && (password.val()==pass))
+//   {
+//     $('.widget-item').hide();
+//     $('.side-nav').css('visibility', 'visible');
+//     $('.mdi-image-dehaze').css('visibility', 'visible');
+//     $('.post-container').show();
+//     $('.add-post').show();
+//     e.preventDefault();
+//   }
+// });
+$('.mdi-image-dehaze').click(function(){
+// alert("hello");
+$('.side-nav').slideToggle();
+});
+// add post
+$('.add-post').click(function(){
+$('#post').clone().insertBefore('#post');
+$('.post-infornartion').css('display','block');
+$('.post-infornartion').fadeOut(3000);
+});
+$('.post-infornartion').click(function(){
+$('html, body').animate({scrollTop : 0},800);
+return false;
+})
+$('.fav').click(function(){
+$(this).toggleClass('fav1');
+});
+  });
+  // setInterval(function(){ toast('New Post', 4000) }, 7000);
+</script>
+</body>
+</html>
