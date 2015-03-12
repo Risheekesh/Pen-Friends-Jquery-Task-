@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+
+    <title>Timer</title>
+
+    <!-- jQuery Include -->
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    
+    <script src="js/mobiscroll.core.js"></script>
+    <script src="js/mobiscroll.frame.js"></script>
+    <script src="js/mobiscroll.scroller.js"></script>
+     <script src="js/mobiscroll.util.datetime.js"></script>
+    <script src="js/mobiscroll.datetimebase.js"></script>
+     <script src="js/mobiscroll.datetime.js"></script>
+
+    <link href="css/mobiscroll.frame.css" rel="stylesheet" type="text/css" />
+    <link href="css/mobiscroll.frame.android.css" rel="stylesheet" type="text/css" />
+    <link href="css/mobiscroll.scroller.css" rel="stylesheet" type="text/css" />
+    <link href="css/mobiscroll.scroller.android.css" rel="stylesheet" type="text/css" />
+    
+
+    
+    
+    <style type="text/css">
+        /* Demo Page styling, you can disregard this in your implementation */
+        body { padding: 0; margin: 0; font-size: 16px; font-family: arial, verdana, sans-serif; }
+        input, select { width: 100%; padding: .625em; margin: 0 0 .625em 0; border: 1px solid #aaa; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; }
+        .header { padding: .625em; background: #5185a8;}
+        .header h1 { margin: 0; padding: 0; color: #fff; text-align: center; font-size: 1.25em; font-weight: bold; text-shadow: 1px 1px 1px #000; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+        .content { padding: 1em; }
+    </style>
+
+    <script>
+        $(function () {
+
+            function init() {
+                
+                $('#demo_datetime').mobiscroll().datetime({
+                    theme: "android",     // Specify theme like: theme: 'ios' or omit setting to use default 
+                    mode:"scroller",
+                    display:"inline",       // Specify scroller mode like: mode: 'mixed' or omit setting to use default
+                    minDate: new Date(2000,3,10,9,22),  // More info about minDate: http://docs.mobiscroll.com/2-14-0/datetime#!opt-minDate
+                    maxDate: new Date(2020,7,30,15,44),   // More info about maxDate: http://docs.mobiscroll.com/2-14-0/datetime#!opt-maxDate
+                    stepMinute: 5  // More info about stepMinute: http://docs.mobiscroll.com/2-14-0/datetime#!opt-stepMinute
+                });    
+            }    
+
+            var demo, theme, mode, display, lang;
+            
+            
+                $("#demo_cont_datetime").show();
+                
+                init();
+
+            $('#demo').trigger('change');
+        });
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Mobiscroll</h1>
+    </div>
+
+    <div class="content">
+        
+        <!-- Demo configurator markup END -->
+
+    
+        <!-- Select demo markup -->
+        <!-- <div data-role="fieldcontain" class="demo-cont" id="demo_cont_select">
+            <label for="demo_select">Try Select</label>
+            <select name="Cities" id="demo_select" data-role="none">
+                <option value="">Please Select</option>
+                <option value="1">Atlanta</option>
+                <option value="2">Berlin</option>
+                <option value="3">Boston</option>
+                <option value="4">Chicago</option>
+                <option value="5">London</option>
+                <option value="6">Los Angeles</option>
+                <option value="7">New York</option>
+                <option value="8">Paris</option>
+                <option value="9">San Francisco</option>
+            </select>   
+        </div> -->
+    
+        <!-- Date demo markup -->
+        
+    
+        <!-- Date & Time demo markup -->
+        <div data-role="fieldcontain" class="demo-cont" id="demo_cont_datetime">
+            <label for="demo_datetime">Try Date & Time</label>
+            <input type="text" id="demo_datetime" />  
+        </div>
+    
+        <!-- Time demo markup -->
+        
+    
+        <!-- Image demo markup -->
+        
+    
+        <!-- Treelist demo markup -->
+        
+    
+    </div>
+</body>
+</html>

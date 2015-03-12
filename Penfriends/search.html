@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Profile </title>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+		<link type="text/css" rel="stylesheet" href="css/style.css">
+		<!-- jQuery Timer -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="mobiscroll-master/js/mobiscroll.core.js"></script>
+		<script src="mobiscroll-master/js/mobiscroll.frame.js"></script>
+		<script src="mobiscroll-master/js/mobiscroll.scroller.js"></script>
+		<script src="mobiscroll-master/js/mobiscroll.util.datetime.js"></script>
+		<script src="mobiscroll-master/js/mobiscroll.datetimebase.js"></script>
+		<script src="mobiscroll-master/js/mobiscroll.datetime.js"></script>
+		<link href="mobiscroll-master/css/mobiscroll.frame.css" rel="stylesheet" type="text/css" />
+		<link href="mobiscroll-master/css/mobiscroll.frame.android.css" rel="stylesheet" type="text/css" />
+		<link href="mobiscroll-master/css/mobiscroll.scroller.css" rel="stylesheet" type="text/css" />
+		<link href="mobiscroll-master/css/mobiscroll.scroller.android.css" rel="stylesheet" type="text/css" />
+		<!-- autosearch libraray -->
+		<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css"> -->
+		<script src="http://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+		<script>
+		$(document).ready(function() {
+			$('.mdi-image-dehaze').click(function(){ //slide menu
+		$('.side-nav').slideToggle();
+		});
+			
+			var ans=["A","C","D"];
+			var selected_ans=[];
+				var counter=1;
+				var ans_index=0;
+			$(".quiz-conatiner").on('click','input[type="radio"]',function() {
+				counter=$('input[type="radio"]:checked').length;
+				var progress1=100/ans.length;
+				var x=progress1*counter;
+				var progressbar = $('#progress'),
+			max = progressbar.attr('max'),
+			value = progressbar.val(x);
+					$('.progress').html(value);
+					counter++;
+			});
+			$('.reset-button').click(function(){
+				for (var l = 1; l <= ans.length; l++)
+						{
+						$('input[name="question'+l+'"]').removeAttr('checked');
+						$('.progress').val(0);
+						// selected_ans=[];
+						counter=1;
+					}
+			});
+			$('.add-button').click(function(event) {
+				$('.upload-question').css('display','block');
+			});
+			$('.upload').click(function(event) {
+				var ques=$('#up_Question1').val();
+					var ans1=$('#ans1').val();
+					var ans2=$('#ans2').val();
+					var ans3=$('#ans3').val();
+					var ans4=$('#ans4').val();
+					var my_value = $('#menu').val();
+					var arr_len=ans.length;
+					ans[arr_len]=my_value;
+				if(ques!="" && ans1!="" && ans2!="" && ans3!="" &&ans4!="" &&my_value!=""){
+					arr_len++;
+					$('.quiz-conatiner').append('<div><div id="question" class="question">'+  arr_len +'.' +ques+'</div><div class="answer"><input type="radio" name="question'+arr_len+'" value="A" />&nbsp;'+ ans1+'<br /><input type="radio" name="question'+arr_len+'" value="B" />&nbsp;'+ans2+'<br /><input type="radio" name="question'+arr_len+'" value="C" />&nbsp;'+ans3+'<br /><input type="radio" name="question'+arr_len+'" value="D" />&nbsp;'+ans4+'<br /></div></div');
+					$('.upload-question').css('display','none');
+						counter=$('input[type="radio"]:checked').length;
+						var progress1=100/ans.length;
+						var x=progress1*counter;
+						var progressbar = $('#progress'),
+					max = progressbar.attr('max'),
+					value = progressbar.val(x);
+				}
+				else
+				{
+						alert("plaese fill all value");
+				}
+			});
+			$('.result-button').click(function(event) {
+						// alert("hello");
+					var score=0;
+					if(counter-1==ans.length)
+					{
+						for (var l = 1; l <= ans.length; l++)
+							{
+							
+							selected_ans[l-1]=$('input[name="question'+ l +'"]:checked').val();
+						if(selected_ans[l-1]==ans[l-1])
+														{
+														score+=1;
+														
+													}
+						}
+								alert("Congratulation! Your score is : " +score+ "out of "+ ans.length);
+					}
+					else
+					{
+						alert("please select all answer");
+					}
+							
+						});
+					
+				
+				
+			var availableTags = [
+			"ActionScript",
+			"AppleScript",
+			"Asp",
+			"BASIC",
+			"C",
+			"C++",
+			"Clojure",
+			"COBOL",
+			"ColdFusion",
+			"Erlang",
+			"Fortran",
+			"Groovy",
+			"Haskell",
+			"Java",
+			"JavaScript",
+			"Lisp",
+			"Perl",
+			"PHP",
+			"Python",
+			"Ruby",
+			"Scala",
+			"Scheme"
+			];
+			$( "#tags" ).autocomplete({
+			source: availableTags
+			});
+			var selectedTags = [];
+			var flag=0;
+			var index=0;
+			var store="";
+			$('.add-search').on('click', '.cancel', function(event) {
+			
+			store=$(this).parent('span').text();
+			$(this).parent().remove();
+			console.log(store);
+			for(var j=0;j<selectedTags.length;j++)
+				{
+				
+				if(store==selectedTags[j])
+				{
+				
+				index=j;
+				}
+				}
+				availableTags[index]=selectedTags[index];
+				selectedTags[index]="";
+				});
+				$('body').on('click', '.ui-menu-item', function(event) {
+										flag=0;
+					var ans=$(this).html();
+					console.log(ans);
+					for(var i=0;i<availableTags.length;i++)
+						{
+						if(ans==availableTags[i])
+						{
+						flag=1;
+						index=i;
+						}
+						}
+						if(flag==1){
+						
+						availableTags[index]="";
+						selectedTags[index]=ans;
+						$('.add-search').append('<span class="add-text" style="float: left;padding-right: 1%;">'+ ans+'<img class="cancel" src="cancel.png" style="cursor: pointer;margin:0 0 3px 7px;height: 12px;"></span>');
+						$('#tags').val("");
+						
+						}
+					});
+					$('#tags').on('keydown',function(e){
+						
+							if($(this).val()!="")
+							{
+					if(e.keyCode==13)
+						{ flag=0;
+						var ans=$(this).val();
+						console.log(ans);
+						for(var i=0;i<availableTags.length;i++)
+							{
+							if(ans==availableTags[i])
+							{
+							flag=1;
+							index=i;
+							}
+							}
+							if(flag==1){
+							
+							availableTags[index]="";
+							selectedTags[index]=ans;
+							$('.add-search').append('<span class="add-text" style="float: left;padding-right: 1%;">'+ ans+'<img class="cancel" src="cancel.png" style="cursor: pointer;margin:0 0 3px 7px;height: 12px;"></span>');
+							$(this).val("");
+							
+							}
+									}
+								}
+						});
+								
+					});
+					$(function () {
+						$('#demo_datetime').prop('disabled',true);
+					function init() {
+					
+					$('#demo_datetime').mobiscroll().datetime({
+					theme: "android",     // Specify theme like: theme: 'ios' or omit setting to use default
+					mode:"scroller",
+					display:"inline",       // Specify scroller mode like: mode: 'mixed' or omit setting to use default
+					minDate: new Date(),  // More info about minDate: http://docs.mobiscroll.com/2-14-0/datetime#!opt-minDate
+					maxDate: new Date(2020,7,30,15,44),   // More info about maxDate: http://docs.mobiscroll.com/2-14-0/datetime#!opt-maxDate
+					stepMinute: 5  // More info about stepMinute: http://docs.mobiscroll.com/2-14-0/datetime#!opt-stepMinute
+					});
+					}
+					var demo, theme, mode, display, lang;
+					
+					
+					$("#demo_cont_datetime").show();
+					
+					init();
+					$('#demo').trigger('change');
+					});
+					// autosearch
+					
+					</script>
+				</head>
+				<body>
+					
+					<nav>
+						<div class="nav-wrapper z-depth-1">
+							<div class="container">
+								<div class="col s12 m12 l12">
+									<a href="#!" class="brand-logo">PenFriends</a>
+									<a href="#!" class="mdi-image-dehaze"></a>
+									<ul class="side-nav wrap-nav" style="visibility:visible;">
+										<li ><a href="home.html"><i class="mdi-action-home left"></i>Home</a></li>
+										<li class="active"><a href="#"><i class="mdi-action-search left"></i>Search</a></li>
+										<li><a href="profile.html"><i class="mdi-action-account-circle left"></i>Profile</a></li>
+										<li><a href="event.html"><i class="mdi-action-view-module left"></i>Event</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</nav>
+					<div class="col s4 ">
+						<div class="search-container">
+							<input type="text" class="search-box" placeholder="search...." id="tags">
+							<div class="add-search"></div>
+							<div data-role="fieldcontain" class="demo-cont" id="demo_cont_datetime">
+								<input type="text" id="demo_datetime" placeholder="Date &amp; Time"/>
+							</div>
+						<progress value="0" max="100" class="progress" id="progress"></progress>
+						<div class="quiz-conatiner">
+							
+							<div>
+								<div id="question" class="question">1. What is the capitol of Michigan?</div>
+								<div class="answer">
+									<input type="radio" name="question1" value="A" />&nbsp;Lansing<br />
+									<input type="radio" name="question1" value="B" />&nbsp;Richmond<br />
+									<input type="radio" name="question1" value="C" />&nbsp;Austin<br />
+									<input type="radio" name="question1" value="D" />&nbsp;Columbus<br />
+								</div>
+							</div>
+							<div>
+								<div class="question">2. What is the capitol of Michigan?</div>
+								<div class="answer">
+									<input type="radio" name="question2" value="A" />&nbsp;Lansing<br />
+									<input type="radio" name="question2" value="B" />&nbsp;Richmond<br />
+									<input type="radio" name="question2" value="C" />&nbsp;Austin<br />
+									<input type="radio" name="question2" value="D" />&nbsp;Columbus<br />
+								</div>
+							</div>
+							<div>
+								<div class="question">3. What is the capitol of Michigan?</div>
+								<div class="answer">
+									<input type="radio" name="question3" value="A" />&nbsp;Lansing<br />
+									<input type="radio" name="question3" value="B" />&nbsp;Richmond<br />
+									<input type="radio" name="question3" value="C" />&nbsp;Austin<br />
+									<input type="radio" name="question3" value="D" />&nbsp;Columbus<br />
+								</div>
+							</div>
+						</div>
+						<div class="prev-section">
+							<input type="submit" name="add-question" value="Add Question" class="add-button" />
+							<input type="submit" name="add-question" value="Submit" class="submit-button" />
+							<input type="submit" name="add-question" value="Result" class="result-button" />
+							<input type="submit" name="add-question" value="Reset" class="reset-button" />
+						</div>
+						<div class="upload-question" id="upload-question">
+							<textarea  class="up_option" id="up_Question1" placeholder="Question" rows="4" cols="50"></textarea><br>
+							<textarea class="up_option" id="ans1" placeholder="option1" rows="2" cols="50"></textarea><br>
+							<textarea class="up_option" id="ans2" placeholder="option2" rows="2" cols="50"></textarea><br>
+							<textarea class="up_option" id="ans3" placeholder="option3" rows="2" cols="50"></textarea><br>
+							<textarea class="up_option" id="ans4" placeholder="option4" rows="2" cols="50"></textarea><br>
+							<select id="menu" name="correct-opt">
+								<option value="Correct Option">-Correct Option-</option>
+								<option value="A">A</option>
+								<option value="B">B</option>
+								<option value="C">C</option>
+								<option value="D">D</option>
+							</select><br>
+							<button class="upload">Submit</button>
+							
+						</div>
+					</div>
+				</div>
+				
+			</body>
+		</html>

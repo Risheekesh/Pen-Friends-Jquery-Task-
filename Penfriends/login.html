@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<title>Profile </title>
+    	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+      	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <script src="https://apis.google.com/js/client:platform.js" async defer></script>
+      	<link type="text/css" rel="stylesheet" href="css/style.css">
+        <script>
+      function signinCallback(authResult) {
+        if (authResult['status']['signed_in']) {
+          // Update the app to reflect a signed in user
+          // Hide the sign-in button now that the user is authorized, for example:
+          window.location="home.html";
+          return false;
+          document.getElementById('signinButton').setAttribute('style', 'display: none');
+        } else {
+          // Update the app to reflect a signed out user
+          // Possible error values:
+          //   "user_signed_out" - User is signed-out
+          //   "access_denied" - User denied access to your app
+          //   "immediate_failed" - Could not automatically log in the user
+          console.log('Sign-in state: ' + authResult['error']);
+        }
+}
+        </script>
+    </head>
+    <body>
+		<nav>
+			<div class="nav-wrapper z-depth-1">
+				<div class="container">
+					<div class="col s12 m12 l12">
+				        <a href="#!" class="brand-logo">PenFriends</a>
+                <!-- <a href="#!" class="mdi-image-dehaze"></a> -->
+		      		</div>
+				</div>
+		  	</div>
+		</nav>
+    <div class="col s4 ">
+      <div class="widget-item z-depth-1">
+        <b>Sign In</b>
+        <div>
+          <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="mdi-action-account-circle prefix"></i>
+                  <input id="username" type="text" class="validate">
+                  <label for="username">Username</label>
+                </div>
+                <div class="input-field col s12">
+                  <i class="mdi-action-https prefix"></i>
+                  <input id="password" type="password" class="validate">
+                  <label for="password">Password</label>
+                </div>
+              <button id="login" class="btn waves-effect waves-light" type="submit">Login<i class="mdi-action-lock-open right"></i></button>
+              <span id="signinButton">
+              <span
+                class="g-signin"
+                data-callback="signinCallback"
+                data-clientid="310012001640-4ucc4vb5h5v4c338fq2khmo41n22obfe.apps.googleusercontent.com"
+                data-cookiepolicy="single_host_origin"
+                data-requestvisibleactions="http://schema.org/AddAction"
+                data-scope="https://www.googleapis.com/auth/plus.login">
+              </span>
+            </span>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      	<script type="text/javascript" src="js/materialize.min.js"></script>
+      	<script type="text/javascript">
+      		$(document).ready(function(e){
+      		      $('.materialboxed').materialbox();
+                var user="Risheekesh";
+                  var pass="12345";
+                 var username=$("#username");
+                 var password=$('#password');
+                $('#login').click(function(e){
+                  if((username.val()==user) && (password.val()==pass))
+                  {
+                   window.location="home.html";
+                   return false;
+                  }
+            });
+                
+		    });
+
+		    // setInterval(function(){ toast('New Post', 4000) }, 7000);
+      	</script>
+    </body>
+</html>

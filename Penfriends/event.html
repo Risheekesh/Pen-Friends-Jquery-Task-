@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<title>Profile </title>
+    	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+      	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      	<link type="text/css" rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+		<nav>
+			<div class="nav-wrapper z-depth-1">
+				<div class="container">
+					<div class="col s12 m12 l12">
+				        <a href="#!" class="brand-logo">PenFriends</a>
+                <a href="#!" class="mdi-image-dehaze"></a>
+				        <ul class="side-nav wrap-nav" style="visibility:visible;">
+				          	<li ><a href="home.html"><i class="mdi-action-home left"></i>Home</a></li>
+				          	<li ><a href="search.html"><i class="mdi-action-search left"></i>Search</a></li>
+                    <li><a href="profile.html"><i class="mdi-action-account-circle left"></i>Profile</a></li>
+                    <li class="active"><a href="#"><i class="mdi-action-view-module left"></i>Event</a></li>
+				        </ul>
+		      		</div>
+				</div>
+		  	</div>
+		</nav>
+      <form class="feedback-container">
+      <input type="text" class="name input"  placeholder="username" required>
+      <input type="password" class="pass input" placeholder="password"  required>
+      <input type="password" class="con-pass input"  placeholder="confirm password" required>
+      <input type="email" class="email input"  placeholder="email-id" required>
+      <input type="radio" name="gender" value="male" id="male"><label for="male">Male</label>
+      <input type="radio" name="gender" value="female" id="female"><label for="female">Female</label>
+      <div class="switch">
+            <label>
+              Off
+              <input type="checkbox">
+              <span class="lever"></span>
+              On
+            </label>
+          </div>
+<div class="clearfix list">
+    <ul id="sortable1" class="connectedSortable">
+      <li class="ui-state-default">Item 1</li>
+      <li class="ui-state-default">Item 2</li>
+      <li class="ui-state-default">Item 3</li>
+      <li class="ui-state-default">Item 4</li>
+      <li class="ui-state-default">Item 5</li>
+  </ul>
+   
+  <ul id="sortable2" class="connectedSortable">
+    <li class="ui-state-highlight">Item 1</li>
+    <li class="ui-state-highlight">Item 2</li>
+    <li class="ui-state-highlight">Item 3</li>
+    <li class="ui-state-highlight">Item 4</li>
+    <li class="ui-state-highlight">Item 5</li>
+  </ul>
+  </div>
+<textarea class="input comment" placeholder="Comment here..." required></textarea>
+<input type="Submit" class="button input">
+      </form>
+    	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      	<script type="text/javascript" src="js/materialize.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+      	<script type="text/javascript">
+      		$(document).ready(function(e){
+            $('.mdi-image-dehaze').click(function(){ //slide menu
+                   $('.side-nav').slideToggle();
+                });
+
+            $('.con-pass').change(function(){
+              
+              var pass=$('.con-pass').val();
+              var con_pass=$('.pass').val();
+              if(pass!=con_pass)
+              {
+                alert("password do not match");
+              }
+            });
+            $('.button').click(function(event) {
+              var pass=$('.con-pass').val();
+              var con_pass=$('.pass').val();
+              var $radios = $('input:radio[name=gender]');
+              if(pass!=con_pass)
+              {
+                alert("password do not match");
+              }else if($radios.is(':checked') === false) {
+                   alert("select gender");
+              }
+
+            });
+            $( "#sortable1, #sortable2" ).sortable({
+              connectWith: ".connectedSortable"
+            }).disableSelection();
+      		      // $('.materialboxed').materialbox();
+                  });
+		    
+      	</script>
+    </body>
+</html>

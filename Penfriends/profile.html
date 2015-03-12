@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Profile </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <!-- <link type="text/css" rel="stylesheet" href="Circular-Progress-Bar/css/style.css"> -->
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+    
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/progress.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="jquery.cropit.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    
+    <script src="cropbox.js"></script>
+    
+  </head>
+  <body>
+    <nav>
+      <div class="nav-wrapper z-depth-1">
+        <div class="container">
+          <div class="col s12 m12 l12">
+            <a href="#!" class="brand-logo">PenFriends</a>
+            <a href="#!" class="mdi-image-dehaze"></a>
+            <ul class="side-nav wrap-nav" style="visibility:visible;">
+              <li ><a href="home.html"><i class="mdi-action-home left"></i>Home</a></li>
+              <li ><a href="search.html"><i class="mdi-action-search left"></i>Search</a></li>
+              <li class="active"><a href="#"><i class="mdi-action-account-circle left"></i>Profile</a></li>
+              <li><a href="event.html"><i class="mdi-action-view-module left"></i>Event</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="profile-container">
+      <div class="cover-pic">
+        <div class="image-editor">
+          <input type="file" class="cropit-image-input"  >
+          <button class="image_upload">Change</button>
+          <input type="range" class="cropit-image-zoom-input">
+          <button class="export">Save</button>
+          <div class="cropit-image-preview-container">
+            <div class="cropit-image-preview"></div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="container1">
+        <div class="imageBox" >
+          <div class="thumbBox" ></div>
+          <div class="spinner" style="display: block">Loading...</div>
+        </div>
+        <div class="action">
+          <input type="file" id="file" style="float:left; width: 230px">
+          <input type="button" id="btnCrop" value="Crop" style="float: right">
+          <input type="button" id="btnZoomIn" value="+" style="float: right">
+          <input type="button" id="btnZoomOut" value="-" style="float: right">
+          <input type="button" id="cancel" value="Cancel" style="float: right">
+        </div>
+      </div>
+      <img src="images/html5.png" alt="pic" class="profile-img">
+      <div class="pie_progress" role="progressbar" data-goal="33">
+        <div class="pie_progress__number">0%</div>
+        <div class="pie_progress__label"></div>
+      </div>
+      <div id="tabs">
+        <div class="row">Settings</div>
+        <ul>
+          <li>
+            <a href="#a" class="map">Map</a>
+          </li>
+          <li>
+            <a href="#b" class="toggle">Toggle</a>
+          </li>
+          <li>
+            <a href="#c" class="combobox">Combobox</a>
+          </li>
+          <li>
+            <a href="#d" class="date">Date</a>
+          </li>
+        </ul>
+        <div id="a" class="all">
+          
+          <script type="text/javascript" src="http://www.webestools.com/google_map_gen.js?lati=19.474313&amp;long=72.829931&amp;zoom=13&amp;width=970&amp;height=400&amp;mapType=normal&amp;map_btn_normal=yes&amp;map_btn_satelite=yes&amp;map_btn_mixte=yes&amp;map_small=yes&amp;marqueur=yes&amp;info_bulle="></script>
+        </div>
+        <div id="b" class="all">
+          <!--  <div class="toggle1 clearfix"><div class="taction">ON</div><div class="taction">OFF</div></div> -->
+          <div class="switch">
+            <label>
+              Off
+              <input type="checkbox">
+              <span class="lever"></span>
+              On
+            </label>
+          </div>
+          
+        </div>
+        <div id="c" class="all">
+          <input type="text" name="example" list="exampleList">
+          <datalist id="exampleList">
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+          </datalist>
+        </div>
+        <div id="d" class="all">
+          
+          <div><input name='date_toggled' type='text' value='' id="datepicker" class='date date_toggled' style='display: inline;text-align: center;' placeholder="Date"/></div>
+        </div>
+      </div>
+    </div>
+    
+    <script type="text/javascript" src="js/rainbow.min.js"></script>
+    <script type="text/javascript" src="js/jquery-asPieProgress.js"></script>
+    <script>
+    $(function() {
+    $('.mdi-image-dehaze').click(function(){ //slide menu
+    $('.side-nav').slideToggle();
+    });
+    
+    $('.date_toggled').attr('readonly', true);
+    var i=0;
+    var j=0;
+    var prog_val=0;
+      $('.pie_progress').asPieProgress({
+    namespace: 'pie_progress'
+    });
+    $('.pie_progress--slow').asPieProgress({
+    namespace: 'pie_progress',
+    goal: 1000,
+    min: 0,
+    max: 1000,
+    speed: 200,
+    easing: 'linear'
+    });
+    // Example with grater loading time - loads longer
+    $('.pie_progress--countdown').asPieProgress({
+    namespace: 'pie_progress',
+    easing: 'linear',
+    first: 120,
+    max: 120,
+    goal: 0,
+    speed: 1200, // 120 s * 1000 ms per s / 100
+    numberCallback: function(n){
+    var minutes = Math.floor(this.now/60);
+    var seconds = this.now % 60;
+    if(seconds < 10) {
+    seconds = '0' + seconds;
+    }
+    return minutes + ': ' + seconds;
+    }
+    });
+    // date picker
+    $( "#datepicker" ).datepicker();
+    $('.taction').click(function(event) {
+    $('.taction').removeClass('toogleaction');
+    $(this).addClass('toogleaction');
+    });
+    $('#a').css('display','block');
+    $('.map').click(function(event) {
+    $('.all').hide();
+    $('#a').show();
+    });
+    $('.toggle').click(function(event) {
+    $('.all').hide();
+    $('#b').show();
+    });
+    $('.combobox').click(function(event) {
+    $('.all').hide();
+    $('#c').show();
+    });
+    $('.date').click(function(event) {
+    $('.all').hide();
+    $('#d').show();
+    });
+    $('.image-editor').cropit({
+    imageBackground: true,
+    imageBackgroundBorderWidth: 20,
+    imageState: {
+    }
+    
+    });
+    $('.cropit-image-input').click(function(event) {
+    $(".cropit-image-preview").show();
+    $('.export').css('display','block');
+    $('.cropit-image-zoom-input').css('display','block');
+    });
+    $('.image_upload').click(function(){
+    $('.cropit-image-input').trigger('click');
+    })
+    $('.export').click(function() {
+    
+    if(i==0){
+      prog_val+=50;
+      $('.pie_progress').asPieProgress('go',prog_val);
+      i++;
+      }
+    $(".cropit-image-preview").hide();
+    $('.export').css('display','none');
+    $('.cropit-image-zoom-input').css('display','none');
+    
+    });
+    
+    $('.profile-img').click(function(event) {
+    $('.container1').css('display','block');
+    });
+    $('#btnCrop').click(function(event) {
+    if(j==0){
+      prog_val+=50;
+      $('.pie_progress').asPieProgress('go',prog_val);
+      j++;
+    }
+    $('.container1').css('display','none');
+    });
+    $('#cancel').click(function(event) {
+    $('.container1').css('display','none');
+    });
+    
+    profile_upload();
+    
+    // date_picker();
+    });
+    function profile_upload() {
+    var options =
+    {
+    thumbBox: '.thumbBox',
+    spinner: '.spinner',
+    imgSrc: 'avatar.png'
+    }
+    var cropper = $('.imageBox').cropbox(options);
+    $('#file').on('change', function(){
+    var reader = new FileReader();
+    reader.onload = function(e) {
+    options.imgSrc = e.target.result;
+    cropper = $('.imageBox').cropbox(options);
+    }
+    reader.readAsDataURL(this.files[0]);
+    this.files = [];
+    })
+    $('#btnCrop').on('click', function(){
+    var img = cropper.getDataURL();
+    $(".profile-img").attr('src', img);
+    })
+    $('#btnZoomIn').on('click', function(){
+    cropper.zoomIn();
+    })
+    $('#btnZoomOut').on('click', function(){
+    cropper.zoomOut();
+    })
+    }
+    
+    </script>
+  </body>
+</html>
